@@ -1,0 +1,21 @@
+services:
+  karaoke:
+    image: radrootllc/karaoke-eternal
+    container_name: karaoke-eternal
+    volumes:
+      - ./karaoke/config:/config
+      - ./karaoke/media:/mnt/karaoke
+    ports:
+      - 80:8080
+    restart: unless-stopped
+
+  camera:
+    image: nexryai/camera.ui:alpine
+    container_name: camera-ui
+    ports:
+      - 81:8081
+      - 1883:1883
+      - 7272:7272
+    volumes:
+      - ./camera:/.camera.ui:rw
+    restart: unless-stopped
